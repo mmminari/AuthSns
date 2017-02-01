@@ -8,6 +8,9 @@
 
 #import "AppDelegate.h"
 
+#import <FBSDKCoreKit/FBSDKCoreKit.h>
+#import "ViewController.h"
+
 @interface AppDelegate ()
 
 @end
@@ -15,11 +18,22 @@
 @implementation AppDelegate
 
 
-- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    // Override point for customization after application launch.
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
+{
+    [[FBSDKApplicationDelegate sharedInstance] application:application didFinishLaunchingWithOptions:launchOptions];
+    [FBSDKProfile enableUpdatesOnAccessTokenChange:YES];
+    
+    UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    
+    ViewController *vc = [storyBoard instantiateViewControllerWithIdentifier:@"stid-ViewController"];
+    
+    UINavigationController *naviVC = [[UINavigationController alloc]initWithRootViewController:vc];
+    
+    self.window.rootViewController = naviVC;
+    
+    
     return YES;
 }
-
 
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
