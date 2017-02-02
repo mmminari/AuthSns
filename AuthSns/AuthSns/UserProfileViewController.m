@@ -12,6 +12,7 @@
 #import <Security/Security.h>
 #import <FBSDKLoginKit/FBSDKLoginKit.h>
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
+#import <TwitterKit/TwitterKit.h>
 
 @interface UserProfileViewController ()
 
@@ -44,7 +45,7 @@
     }
     else if(self.loginType == LoginTypeTwitter)
     {
-        
+        [self getTwitterUserInfo];
     }
     
     
@@ -60,7 +61,7 @@
     }
     else if(self.loginType == LoginTypeTwitter)
     {
-        
+        [self twitterUserLogOut];
     }
 }
 
@@ -148,6 +149,49 @@
         
         [self.navigationController popViewControllerAnimated:YES];
     }];
+}
+    
+#pragma mark - Twitter
+- (void)getTwitterUserInfo
+{
+    TWTRAPIClient *client = [TWTRAPIClient clientWithCurrentUser];
+    
+    NSURLRequest *request = [client URLRequestWithMethod:@"GET"
+                                                     URL:@"https://api.twitter.com/1.1/account/verify_credentials.json"
+                                              parameters:@{@"include_email": @"true", @"skip_status": @"true"}
+                                                   error:nil];
+    
+    [client sendTwitterRequest:request completion:^(NSURLResponse * _Nullable response, NSData * _Nullable data, NSError * _Nullable connectionError) {
+        
+        NSLog(@"Response Error : %@", connectionError);
+        
+        NSDictionary *responseData = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:nil];
+        
+        NSLog(@"Converted Response Data : %@", responseData);
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            
+            self.lbId.text = self.userId;
+            
+            self.lbUserName.text = [responseData objectForKey:@"name"];
+            
+            [self setImageView:self.ivProfile urlString:[responseData objectForKey:@"profile_image_url"] placeholderImage:nil animation:YES];
+            
+        });
+    }];
+        
+}
+
+- (void)twitterUserLogOut
+{
+    TWTRSessionStore *store = [[Twitter sharedInstance] sessionStore];
+    
+    NSLog(@"Twitter Logout With User ID : %@", self.userId);
+    
+    [store logOutUserID:self.userId];
+
+    [self.navigationController popViewControllerAnimated:YES];
+    
 }
 
 #pragma mark - Private Method

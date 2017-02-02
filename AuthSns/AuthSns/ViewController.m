@@ -12,6 +12,8 @@
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import <FBSDKLoginKit/FBSDKLoginKit.h>
 
+#import <TwitterKit/TwitterKit.h>
+
 @interface ViewController ()
 
 @property (weak, nonatomic) IBOutlet UIButton *btnLogin;
@@ -34,6 +36,11 @@
 - (IBAction)touchedLoginButton:(UIButton *)sender
 {
     [self doFaceBookLogin];
+}
+    
+- (IBAction)touchedTwitterLoginButton:(UIButton *)sender
+{
+    [self doTwitterLogin];
 }
 
 #pragma mark - Private Method
@@ -67,16 +74,40 @@
             NSLog(@"email permission declined");
         }
         
-        [self moveToDetailVC];
+        [self moveToDetailVCWithLogInType:LoginTypeFacebook];
+        
+    }];
+}
+    
+- (void)doTwitterLogin
+{
+    //cache session 을 사용하지 않는 방법으로 로그인
+    [[Twitter sharedInstance] logInWithMethods:TWTRLoginMethodWebBasedForceLogin
+                                    completion:^(TWTRSession * _Nullable session, NSError * _Nullable error) {
+        
+                if(session)
+                {
+                    NSLog(@"Login session : %@", [session userName]);
+        
+                    self.userID = [session userID];
+        
+                    [self moveToDetailVCWithLogInType:LoginTypeTwitter];
+                }
+                else
+                {
+                    NSLog(@"Login Error : %@", error.description);
+                }
         
     }];
 }
 
-- (void)moveToDetailVC
+
+- (void)moveToDetailVCWithLogInType:(LoginType)loginType
 {
     UserProfileViewController *userProfileVC = [self.storyboard instantiateViewControllerWithIdentifier:@"stid-UserProfileVC"];
     
     userProfileVC.userId = self.userID;
+    userProfileVC.loginType = loginType;
     
     [self.navigationController pushViewController:userProfileVC animated:YES];
 }

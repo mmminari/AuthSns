@@ -8,8 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-
-
 typedef NS_ENUM(NSInteger, LoginType) {
     LoginTypeFacebook = 0,
     LoginTypeTwitter,

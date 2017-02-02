@@ -161,6 +161,7 @@
 				6DDFD4E01E41C647001F1F84 /* Resources */,
 				AEB4C4F0259534086CE979D6 /* [CP] Embed Pods Frameworks */,
 				61DAD572EA0C19498298ECB7 /* [CP] Copy Pods Resources */,
+				6D91BE551E41D6E5002AD4CF /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -312,6 +313,19 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-AuthSns/Pods-AuthSns-resources.sh\"\n";
 			showEnvVarsInLog = 0;
+		};
+		6D91BE551E41D6E5002AD4CF /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Fabric/run\" f65ff130ceea4d5d32930f1754c6d7bb63c75f89 0a4907eddd360be5d66b8c84f6d9cbe4ede1e7b9aeea2591efe5a6b355e28e1a\n";
 		};
 		AEB4C4F0259534086CE979D6 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;

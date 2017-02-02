@@ -8,6 +8,10 @@ target 'AuthSns' do
     pod 'FBSDKShareKit'
     pod 'FBSDKLoginKit'
     pod 'SDWebImage'
+    pod 'Fabric'
+    pod 'TwitterKit'
+    pod 'Crashlytics'
+    pod 'TwitterCore'
 
   # Pods for AuthSns
 

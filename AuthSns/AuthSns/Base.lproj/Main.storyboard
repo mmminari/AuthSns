@@ -44,7 +44,7 @@
                                     <color key="titleColor" red="0.85098039219999999" green="0.84705882349999995" blue="0.98823529409999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
-                                    <action selector="touchedTwitterLoginButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="T39-PN-PCv"/>
+                                    <action selector="touchedTwitterLoginButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="tEP-0W-cGU"/>
                                 </connections>
                             </button>
                         </subviews>

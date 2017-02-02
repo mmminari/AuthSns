@@ -9,6 +9,10 @@
 #import "AppDelegate.h"
 
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
+
+#import <Fabric/Fabric.h>
+#import <TwitterKit/TwitterKit.h>
+
 #import "ViewController.h"
 
 @interface AppDelegate ()
@@ -23,6 +27,11 @@
     [[FBSDKApplicationDelegate sharedInstance] application:application didFinishLaunchingWithOptions:launchOptions];
     [FBSDKProfile enableUpdatesOnAccessTokenChange:YES];
     
+    [[Twitter sharedInstance] startWithConsumerKey:@"4FF1tleIdKWfmjEg6FakqnBXv"
+                                    consumerSecret:@"Gu8c9ZYiSfYPPs9OAZKloOzZHIQ159T2eB56yQ2XeA1jjOWXbl"];
+    
+    [Fabric with:@[[Twitter class]]];
+    
     UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     
     ViewController *vc = [storyBoard instantiateViewControllerWithIdentifier:@"stid-ViewController"];
@@ -33,6 +42,17 @@
     
     
     return YES;
+}
+
+- (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<NSString *,id> *)options
+{
+    if ([[Twitter sharedInstance] application:app openURL:url options:options])
+    {
+        return YES;
+    }
+    
+ 
+    return NO;
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {
