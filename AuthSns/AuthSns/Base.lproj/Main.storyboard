@@ -34,7 +34,6 @@
                                 </state>
                                 <connections>
                                     <action selector="touchedLoginButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="adC-Zi-qEn"/>
-                                    <segue destination="sYx-po-eyJ" kind="show" identifier="facebookLogin" id="01I-x1-0d7"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="C7Q-uj-fcI">
@@ -46,7 +45,6 @@
                                 </state>
                                 <connections>
                                     <action selector="touchedTwitterLoginButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="tEP-0W-cGU"/>
-                                    <segue destination="sYx-po-eyJ" kind="show" identifier="twitterLogin" id="Tbd-BG-q3h"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -61,6 +59,10 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="p86-On-8aO"/>
+                    <connections>
+                        <segue destination="sYx-po-eyJ" kind="show" identifier="facebookLogin" id="wLn-17-Wgv"/>
+                        <segue destination="sYx-po-eyJ" kind="show" identifier="twitterLogin" id="Gub-6v-ASv"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
@@ -164,6 +166,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="Tbd-BG-q3h"/>
+        <segue reference="Gub-6v-ASv"/>
     </inferredMetricsTieBreakers>
 </document>
