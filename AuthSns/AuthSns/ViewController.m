@@ -74,7 +74,7 @@
             NSLog(@"email permission declined");
         }
         
-        [self moveToDetailVCWithLogInType:LoginTypeFacebook];
+        [self performSegueWithIdentifier:@"facebookLogin" sender:self];
         
     }];
 }
@@ -90,14 +90,13 @@
                     NSLog(@"Login session : %@", [session userName]);
         
                     self.userID = [session userID];
-        
-                    [self moveToDetailVCWithLogInType:LoginTypeTwitter];
+                    
+                    [self performSegueWithIdentifier:@"twitterLogin" sender:self];
                 }
                 else
                 {
                     NSLog(@"Login Error : %@", error.description);
                 }
-        
     }];
 }
 
@@ -110,6 +109,26 @@
     userProfileVC.loginType = loginType;
     
     [self.navigationController pushViewController:userProfileVC animated:YES];
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    UserProfileViewController *targetVC = [segue destinationViewController];
+    
+    targetVC.userId = self.userID;
+    
+    if([[segue identifier]isEqualToString:@"facebookLogin"])
+    {
+        NSLog(@"moveToFaceBookDetail");
+        
+        targetVC.loginType = LoginTypeFacebook;
+    }
+    else if([[segue identifier]isEqualToString:@"twitterLogin"])
+    {
+        NSLog(@"moveToTwitterDetail");
+        
+        targetVC.loginType = LoginTypeTwitter;
+    }
 }
 
 @end

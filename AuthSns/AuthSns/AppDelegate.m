@@ -30,16 +30,7 @@
     [[Twitter sharedInstance] startWithConsumerKey:@"4FF1tleIdKWfmjEg6FakqnBXv"
                                     consumerSecret:@"Gu8c9ZYiSfYPPs9OAZKloOzZHIQ159T2eB56yQ2XeA1jjOWXbl"];
     
-    [Fabric with:@[[Twitter class]]];
-    
-    UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    
-    ViewController *vc = [storyBoard instantiateViewControllerWithIdentifier:@"stid-ViewController"];
-    
-    UINavigationController *naviVC = [[UINavigationController alloc]initWithRootViewController:vc];
-    
-    self.window.rootViewController = naviVC;
-    
+    [Fabric with:@[[Twitter class]]];    
     
     return YES;
 }
